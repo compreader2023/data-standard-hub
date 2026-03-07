@@ -19,7 +19,7 @@ export default function DataStandards() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 flex flex-col md:flex-row" style={{ height: "calc(100vh - 64px)" }}>
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden" style={{ height: "calc(100vh - 64px)" }}>
         {/* Sidebar */}
         <aside
           className={`${
