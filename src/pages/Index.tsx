@@ -1,9 +1,45 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Database, ShieldCheck, Search, ArrowRight, FileCheck, PlayCircle } from "lucide-react";
+import { Database, ShieldCheck, Search, ArrowRight, FileCheck, PlayCircle, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import heroBanner from "@/assets/hero-banner.jpg";
+import banner1 from "@/assets/banner-1.jpg";
+import banner2 from "@/assets/banner-2.jpg";
+import banner3 from "@/assets/banner-3.jpg";
+import videoCover from "@/assets/video-cover.jpg";
+import newsPolicy from "@/assets/news-policy.jpg";
+import newsIndustry from "@/assets/news-industry.jpg";
+
+const banners = [
+  {
+    image: banner1,
+    title: "产品主数据标准",
+    subtitle: "推动工程建设领域产品主数据标准化与数字化转型",
+    buttons: [
+      { label: "查看产品主数据标准", link: "/data", variant: "primary" as const },
+      { label: "了解产品主数据标准", link: "/about", variant: "outline" as const },
+    ],
+  },
+  {
+    image: banner2,
+    title: "行业专家共建标准",
+    subtitle: "汇聚行业专家智慧，共同贡献力量，补充和完善产品主数据标准体系",
+    buttons: [
+      { label: "查看产品主数据标准", link: "/data", variant: "primary" as const },
+      { label: "了解产品主数据标准", link: "/about", variant: "outline" as const },
+    ],
+  },
+  {
+    image: banner3,
+    title: "产品数据合规认证",
+    subtitle: "基于CPMS产品主数据标准的产品数据合规性认证服务",
+    buttons: [
+      { label: "产品数据认证", link: "/certification", variant: "primary" as const },
+      { label: "了解产品主数据标准", link: "/about", variant: "outline" as const },
+    ],
+  },
+];
 
 const coreServices = [
   {
@@ -27,15 +63,15 @@ const coreServices = [
 ];
 
 const policyNews = [
-  { date: "2025-12-20", title: "工信部发布工业数据管理新规", desc: "新规要求工业企业建立标准化产品数据管理体系。" },
-  { date: "2025-11-15", title: "国务院推进数字化转型指导意见", desc: "明确提出加快工业产品数据标准化建设步伐。" },
-  { date: "2025-10-28", title: "行业标准化工作会议召开", desc: "会议强调产品数据标准在工程建设中的核心地位。" },
+  { date: "2025-12-20", title: "工信部发布工业数据管理新规", desc: "新规要求工业企业建立标准化产品数据管理体系。", image: newsPolicy },
+  { date: "2025-11-15", title: "国务院推进数字化转型指导意见", desc: "明确提出加快工业产品数据标准化建设步伐。", image: newsPolicy },
+  { date: "2025-10-28", title: "行业标准化工作会议召开", desc: "会议强调产品数据标准在工程建设中的核心地位。", image: newsPolicy },
 ];
 
 const industryNews = [
-  { date: "2025-12-15", title: "CPMS 2025年度标准更新发布", desc: "新版标准新增了200余项产品数据属性定义。" },
-  { date: "2025-11-20", title: "CPMS与国际标准组织CFIHOS达成合作", desc: "双方将在产品数据标准互认领域开展合作。" },
-  { date: "2025-10-08", title: "首批CPMS产品数据认证企业名单公布", desc: "共有15家企业通过首批产品数据合规认证。" },
+  { date: "2025-12-15", title: "CPMS 2025年度标准更新发布", desc: "新版标准新增了200余项产品数据属性定义。", image: newsIndustry },
+  { date: "2025-11-20", title: "CPMS与国际标准组织CFIHOS达成合作", desc: "双方将在产品数据标准互认领域开展合作。", image: newsIndustry },
+  { date: "2025-10-08", title: "首批CPMS产品数据认证企业名单公布", desc: "共有15家企业通过首批产品数据合规认证。", image: newsIndustry },
 ];
 
 const announcements = [
@@ -43,7 +79,6 @@ const announcements = [
   { date: "2026-02-15", title: "CPMS标准数据库系统升级维护公告" },
   { date: "2026-01-20", title: "CPMS专家委员会2026年第一次会议通知" },
   { date: "2026-01-10", title: "关于征集CPMS标准修订意见的公告" },
-  { date: "2025-12-30", title: "2025年度CPMS标准应用优秀案例评选结果公示" },
 ];
 
 const experts = [
@@ -56,37 +91,110 @@ const experts = [
 const partners = ["中国石油", "中国石化", "中国海油", "国家管网", "中国化学", "中国中冶", "华能集团"];
 
 export default function Index() {
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  const nextBanner = useCallback(() => {
+    setCurrentBanner((prev) => (prev + 1) % banners.length);
+  }, []);
+
+  const prevBanner = useCallback(() => {
+    setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextBanner, 5000);
+    return () => clearInterval(timer);
+  }, [nextBanner]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      {/* Hero Banner */}
+      {/* Banner Carousel */}
       <section className="relative overflow-hidden" style={{ minHeight: "480px" }}>
-        <img
-          src={heroBanner}
-          alt="产品主数据标准"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="hero-overlay absolute inset-0" />
-        <div className="relative container flex flex-col items-start justify-center py-24 md:py-32 lg:py-40">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4 animate-fade-in">
-            产品主数据标准
-          </h1>
-          <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
-            推动工程建设领域产品数据标准化与数字化转型
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-8">
-              <Link to="/data">进入标准数据库 <ArrowRight className="ml-2 h-4 w-4" /></Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="border-primary-foreground/40 text-primary-foreground hover:bg-primary-foreground/10">
-              <Link to="/about">了解CPMS标准</Link>
-            </Button>
+        {banners.map((banner, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 transition-opacity duration-700 ${i === currentBanner ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+          >
+            <img src={banner.image} alt={banner.title} className="absolute inset-0 w-full h-full object-cover" />
+            <div className="hero-overlay absolute inset-0" />
+            <div className="relative container flex flex-col items-start justify-center py-24 md:py-32 lg:py-40 h-full">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+                {banner.title}
+              </h1>
+              <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8">
+                {banner.subtitle}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3">
+                {banner.buttons.map((btn, bi) => (
+                  <Button
+                    key={bi}
+                    asChild
+                    size="lg"
+                    className={
+                      btn.variant === "primary"
+                        ? "bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold px-8"
+                        : "border-2 border-primary-foreground/60 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 font-semibold px-8"
+                    }
+                  >
+                    <Link to={btn.link}>
+                      {btn.label}
+                      {btn.variant === "primary" && <ArrowRight className="ml-2 h-4 w-4" />}
+                    </Link>
+                  </Button>
+                ))}
+              </div>
+            </div>
           </div>
+        ))}
+        {/* Carousel controls */}
+        <button
+          onClick={prevBanner}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background/20 hover:bg-background/40 flex items-center justify-center text-primary-foreground transition-colors"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          onClick={nextBanner}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-background/20 hover:bg-background/40 flex items-center justify-center text-primary-foreground transition-colors"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+          {banners.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentBanner(i)}
+              className={`w-3 h-3 rounded-full transition-colors ${i === currentBanner ? "bg-secondary" : "bg-primary-foreground/40"}`}
+            />
+          ))}
         </div>
       </section>
 
-      {/* About CPMS */}
+      {/* Announcements - compact, right after banner */}
+      <section className="py-4 border-b border-border bg-accent/50">
+        <div className="container flex items-center gap-4">
+          <div className="flex items-center gap-2 shrink-0">
+            <Volume2 className="h-4 w-4 text-secondary" />
+            <span className="text-sm font-semibold text-foreground">公告</span>
+          </div>
+          <div className="flex-1 overflow-hidden">
+            <div className="flex items-center gap-6 text-sm overflow-x-auto scrollbar-hide">
+              {announcements.map((item, i) => (
+                <Link key={i} to="/news" className="whitespace-nowrap text-muted-foreground hover:text-primary transition-colors shrink-0">
+                  <span className="text-xs text-muted-foreground/60 mr-2">[{item.date}]</span>
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <Link to="/news" className="text-xs text-secondary hover:underline shrink-0">更多</Link>
+        </div>
+      </section>
+
+      {/* About CPMS + Video */}
       <section className="py-16 md:py-24">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -103,10 +211,10 @@ export default function Index() {
                 <Link to="/about">了解更多</Link>
               </Button>
             </div>
-            <div className="bg-muted rounded-xl flex items-center justify-center aspect-video">
-              <div className="text-center">
-                <PlayCircle className="h-16 w-16 text-muted-foreground/40 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground">点击播放CPMS宣传视频</p>
+            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video">
+              <img src={videoCover} alt="CPMS宣传视频" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
+                <PlayCircle className="h-16 w-16 text-primary-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
               </div>
             </div>
           </div>
@@ -150,10 +258,13 @@ export default function Index() {
               </div>
               <div className="space-y-4">
                 {policyNews.map((item, i) => (
-                  <Link key={i} to="/news" className="block card-elevated bg-card rounded-lg p-5 border border-border">
-                    <span className="text-xs text-muted-foreground">{item.date}</span>
-                    <h3 className="font-semibold text-foreground mt-1 mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  <Link key={i} to="/news" className="flex gap-4 card-elevated bg-card rounded-lg border border-border overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-28 h-24 object-cover shrink-0" />
+                    <div className="py-3 pr-4">
+                      <span className="text-xs text-muted-foreground">{item.date}</span>
+                      <h3 className="font-semibold text-foreground mt-1 mb-1 text-sm line-clamp-1">{item.title}</h3>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{item.desc}</p>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -166,10 +277,13 @@ export default function Index() {
               </div>
               <div className="space-y-4">
                 {industryNews.map((item, i) => (
-                  <Link key={i} to="/news" className="block card-elevated bg-card rounded-lg p-5 border border-border">
-                    <span className="text-xs text-muted-foreground">{item.date}</span>
-                    <h3 className="font-semibold text-foreground mt-1 mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  <Link key={i} to="/news" className="flex gap-4 card-elevated bg-card rounded-lg border border-border overflow-hidden">
+                    <img src={item.image} alt={item.title} className="w-28 h-24 object-cover shrink-0" />
+                    <div className="py-3 pr-4">
+                      <span className="text-xs text-muted-foreground">{item.date}</span>
+                      <h3 className="font-semibold text-foreground mt-1 mb-1 text-sm line-clamp-1">{item.title}</h3>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{item.desc}</p>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -178,26 +292,8 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Announcements */}
-      <section className="py-16 md:py-20 section-alt">
-        <div className="container">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-foreground">公告通知</h2>
-            <Link to="/news" className="text-sm text-secondary hover:underline">更多 &gt;&gt;</Link>
-          </div>
-          <div className="bg-card rounded-lg border border-border divide-y divide-border">
-            {announcements.map((item, i) => (
-              <Link key={i} to="/news" className="flex items-center justify-between px-6 py-4 hover:bg-accent/50 transition-colors">
-                <span className="text-sm text-foreground">{item.title}</span>
-                <span className="text-xs text-muted-foreground shrink-0 ml-4">{item.date}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Experts */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 section-alt">
         <div className="container">
           <div className="text-center mb-12">
             <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
@@ -218,7 +314,7 @@ export default function Index() {
       </section>
 
       {/* Partners */}
-      <section className="py-16 md:py-20 section-alt">
+      <section className="py-16 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
             <span className="text-secondary font-semibold text-sm mb-2 block">合作伙伴</span>
