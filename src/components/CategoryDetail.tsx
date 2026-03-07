@@ -11,6 +11,89 @@ interface Props {
   onNavigate: (node: CategoryNode) => void;
 }
 
+/* Shared panel for product images */
+function ProductImagesPanel({ node }: { node: CategoryNode }) {
+  return (
+    <div className="detail-section">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Image className="h-4 w-4 text-muted-foreground" />
+          <h2 className="text-lg font-semibold text-foreground">产品图片</h2>
+        </div>
+        <Button variant="outline" size="sm">
+          <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
+        </Button>
+      </div>
+      <div className="rounded-lg overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
+        <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
+      </div>
+    </div>
+  );
+}
+
+/* Shared panel for 3D model */
+function ModelPanel() {
+  return (
+    <div className="detail-section">
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Box className="h-4 w-4 text-muted-foreground" />
+          <h2 className="text-lg font-semibold text-foreground">3D模型预览</h2>
+        </div>
+        <Button variant="outline" size="sm">
+          <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
+        </Button>
+      </div>
+      <div className="rounded-lg bg-muted aspect-[4/3] flex items-center justify-center">
+        <div className="text-center text-muted-foreground">
+          <Box className="h-12 w-12 mx-auto mb-2 opacity-30" />
+          <p className="text-xs">3D模型加载区域</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* Shared panel for basic info */
+function BasicInfoPanel({ node }: { node: CategoryNode }) {
+  return (
+    <div className="detail-section">
+      <div className="flex items-start justify-between mb-4">
+        <h2 className="text-lg font-semibold text-foreground">基本信息</h2>
+        <Button variant="outline" size="sm">
+          <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
+        </Button>
+      </div>
+      <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+        <div className="md:col-span-2">
+          <dt className="text-muted-foreground mb-0.5">描述</dt>
+          <dd className="text-foreground">{node.description || "暂无描述"}</dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground mb-0.5">版本号</dt>
+          <dd className="text-foreground">{node.version || "-"}</dd>
+        </div>
+        <div>
+          <dt className="text-muted-foreground mb-0.5">专家组名称</dt>
+          <dd className="text-foreground">{node.expertGroup || "-"}</dd>
+        </div>
+        <div className="md:col-span-2">
+          <dt className="text-muted-foreground mb-0.5">应用示例</dt>
+          <dd>
+            {node.applicationExample ? (
+              <a href={node.applicationExample} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline break-all">
+                {node.applicationExample}
+              </a>
+            ) : (
+              <span className="text-muted-foreground">-</span>
+            )}
+          </dd>
+        </div>
+      </dl>
+    </div>
+  );
+}
+
 export default function CategoryDetail({ node, onNavigate }: Props) {
   const isProduct = node.level === 6;
   const path = getPathToNode(categoryTree, node.code) || [];
@@ -33,101 +116,61 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
         ))}
       </nav>
 
-      {/* Prominent name & code - always visible */}
+      {/* Prominent name & code */}
       <div className="detail-section">
-        <div className="mb-0">
-          <h3 className="text-xl md:text-2xl font-bold text-primary">{node.name}</h3>
-          <p className="text-sm font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
-        </div>
+        <h3 className="text-xl md:text-2xl font-bold text-primary">{node.name}</h3>
+        <p className="text-sm font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
       </div>
 
-      {/* Level 6: Tabs for basic info / product images / 3D */}
+      {/* Level 6: Product detail */}
       {isProduct ? (
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="w-full justify-start">
-            <TabsTrigger value="basic">基本信息</TabsTrigger>
-            <TabsTrigger value="images">产品图片</TabsTrigger>
-            <TabsTrigger value="model">3D模型预览</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="basic" className="mt-4">
-            <div className="detail-section">
-              <div className="flex items-start justify-between mb-4">
-                <h2 className="text-lg font-semibold text-foreground">基本信息</h2>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
-                  </Button>
-                </div>
-              </div>
-              <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
-                <div className="md:col-span-2">
-                  <dt className="text-muted-foreground mb-0.5">描述</dt>
-                  <dd className="text-foreground">{node.description || "暂无描述"}</dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground mb-0.5">版本号</dt>
-                  <dd className="text-foreground">{node.version || "-"}</dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground mb-0.5">专家组名称</dt>
-                  <dd className="text-foreground">{node.expertGroup || "-"}</dd>
-                </div>
-                <div className="md:col-span-2">
-                  <dt className="text-muted-foreground mb-0.5">应用示例</dt>
-                  <dd>
-                    {node.applicationExample ? (
-                      <a href={node.applicationExample} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline break-all">
-                        {node.applicationExample}
-                      </a>
-                    ) : (
-                      <span className="text-muted-foreground">-</span>
-                    )}
-                  </dd>
-                </div>
-              </dl>
+        <>
+          {/* Wide screen (>=1280px): side-by-side layout */}
+          <div className="hidden xl:grid xl:grid-cols-[1fr_380px] xl:gap-6">
+            {/* Left column: basic info + attributes */}
+            <div className="space-y-4">
+              <BasicInfoPanel node={node} />
+              {/* Attribute table inline */}
+              {node.attributes && node.attributes.length > 0 && (
+                <AttributeTable node={node} />
+              )}
             </div>
-          </TabsContent>
-
-          <TabsContent value="images" className="mt-4">
-            <div className="detail-section">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Image className="h-4 w-4 text-muted-foreground" />
-                  <h2 className="text-lg font-semibold text-foreground">产品图片</h2>
-                </div>
-                <Button variant="outline" size="sm">
-                  <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
-                </Button>
-              </div>
-              <div className="rounded-lg overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center max-w-lg">
-                <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
-              </div>
+            {/* Right column: images + 3D stacked */}
+            <div className="space-y-4">
+              <ProductImagesPanel node={node} />
+              <ModelPanel />
             </div>
-          </TabsContent>
+          </div>
 
-          <TabsContent value="model" className="mt-4">
-            <div className="detail-section">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Box className="h-4 w-4 text-muted-foreground" />
-                  <h2 className="text-lg font-semibold text-foreground">3D模型预览</h2>
-                </div>
-                <Button variant="outline" size="sm">
-                  <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
-                </Button>
+          {/* Narrower screens: tabs layout */}
+          <div className="xl:hidden">
+            <Tabs value={activeTab} onValueChange={setActiveTab}>
+              <TabsList className="w-full justify-start">
+                <TabsTrigger value="basic">基本信息</TabsTrigger>
+                <TabsTrigger value="images">产品图片</TabsTrigger>
+                <TabsTrigger value="model">3D模型预览</TabsTrigger>
+              </TabsList>
+              <TabsContent value="basic" className="mt-4">
+                <BasicInfoPanel node={node} />
+              </TabsContent>
+              <TabsContent value="images" className="mt-4">
+                <ProductImagesPanel node={node} />
+              </TabsContent>
+              <TabsContent value="model" className="mt-4">
+                <ModelPanel />
+              </TabsContent>
+            </Tabs>
+
+            {/* Attribute table below tabs on narrow */}
+            {node.attributes && node.attributes.length > 0 && (
+              <div className="mt-4">
+                <AttributeTable node={node} />
               </div>
-              <div className="rounded-lg bg-muted aspect-[4/3] flex items-center justify-center max-w-lg">
-                <div className="text-center text-muted-foreground">
-                  <Box className="h-12 w-12 mx-auto mb-2 opacity-30" />
-                  <p className="text-xs">3D模型加载区域</p>
-                </div>
-              </div>
-            </div>
-          </TabsContent>
-        </Tabs>
+            )}
+          </div>
+        </>
       ) : (
-        /* Level 1-5: Basic info without tabs */
+        /* Level 1-5 */
         <div className="detail-section">
           <div className="flex items-start justify-between mb-4">
             <h2 className="text-lg font-semibold text-foreground">基本信息</h2>
@@ -174,53 +217,54 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
           </div>
         </div>
       )}
+    </div>
+  );
+}
 
-      {/* Attribute table (level 6) */}
-      {isProduct && node.attributes && node.attributes.length > 0 && (
-        <div className="detail-section">
-          <div className="flex items-start justify-between mb-4">
-            <h2 className="text-lg font-semibold text-foreground">属性列表</h2>
-            <div className="flex gap-2 flex-wrap">
-              <Button variant="outline" size="sm">
-                <FileEdit className="h-3.5 w-3.5 mr-1" /> 申请修改
-              </Button>
-              <Button variant="outline" size="sm">
-                <Download className="h-3.5 w-3.5 mr-1" /> 下载
-              </Button>
-              <Button variant="outline" size="sm">
-                <Share2 className="h-3.5 w-3.5 mr-1" /> API同步
-              </Button>
-            </div>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-primary text-primary-foreground">
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tl-md">序号</th>
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">编码</th>
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">属性名称</th>
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">类型</th>
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">单位编码-名称</th>
-                  <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tr-md">值序号-编码-名称</th>
-                </tr>
-              </thead>
-              <tbody>
-                {node.attributes.map((attr, i) => (
-                  <tr key={attr.code} className={i % 2 === 0 ? "bg-card" : "bg-muted/30"}>
-                    <td className="px-3 py-2.5 border-b border-border">{attr.seq}</td>
-                    <td className="px-3 py-2.5 border-b border-border font-mono text-xs">{attr.code}</td>
-                    <td className="px-3 py-2.5 border-b border-border">{attr.name}</td>
-                    <td className="px-3 py-2.5 border-b border-border">{attr.type}</td>
-                    <td className="px-3 py-2.5 border-b border-border">{attr.unitCodeName}</td>
-                    <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-xs leading-relaxed">{attr.values}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+/* Extracted attribute table component */
+function AttributeTable({ node }: { node: CategoryNode }) {
+  return (
+    <div className="detail-section">
+      <div className="flex items-start justify-between mb-4">
+        <h2 className="text-lg font-semibold text-foreground">属性列表</h2>
+        <div className="flex gap-2 flex-wrap">
+          <Button variant="outline" size="sm">
+            <FileEdit className="h-3.5 w-3.5 mr-1" /> 申请修改
+          </Button>
+          <Button variant="outline" size="sm">
+            <Download className="h-3.5 w-3.5 mr-1" /> 下载
+          </Button>
+          <Button variant="outline" size="sm">
+            <Share2 className="h-3.5 w-3.5 mr-1" /> API同步
+          </Button>
         </div>
-      )}
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-primary text-primary-foreground">
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tl-md">序号</th>
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">编码</th>
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">属性名称</th>
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">类型</th>
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap">单位编码-名称</th>
+              <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tr-md">值序号-编码-名称</th>
+            </tr>
+          </thead>
+          <tbody>
+            {node.attributes!.map((attr, i) => (
+              <tr key={attr.code} className={i % 2 === 0 ? "bg-card" : "bg-muted/30"}>
+                <td className="px-3 py-2.5 border-b border-border">{attr.seq}</td>
+                <td className="px-3 py-2.5 border-b border-border font-mono text-xs">{attr.code}</td>
+                <td className="px-3 py-2.5 border-b border-border">{attr.name}</td>
+                <td className="px-3 py-2.5 border-b border-border">{attr.type}</td>
+                <td className="px-3 py-2.5 border-b border-border">{attr.unitCodeName}</td>
+                <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-xs leading-relaxed">{attr.values}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
