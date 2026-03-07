@@ -96,7 +96,7 @@ export default function DataStandards() {
 
         {/* Main content - independent scroll */}
         <main className="flex-1 overflow-y-auto">
-          <div className="p-4 md:p-6 lg:p-8 max-w-7xl">
+          <div className="p-4 md:p-6 lg:p-8">
             {selectedNode ? (
               <CategoryDetail node={selectedNode} onNavigate={handleSelect} />
             ) : (
