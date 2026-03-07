@@ -27,7 +27,7 @@ export default function DataStandards() {
           } transition-all duration-300 border-r border-border bg-card shrink-0 overflow-hidden flex flex-col`}
         >
           <div className="p-4 border-b border-border shrink-0">
-            <h3 className="text-sm font-semibold text-foreground mb-3">产品分类目录</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">产品主数据分类目录</h3>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
