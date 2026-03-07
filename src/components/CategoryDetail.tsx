@@ -125,49 +125,28 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
       {/* Level 6: Product detail */}
       {isProduct ? (
         <>
-          {/* Wide screen (>=1280px): side-by-side layout */}
-          <div className="hidden xl:grid xl:grid-cols-[1fr_380px] xl:gap-6">
-            {/* Left column: basic info + attributes */}
-            <div className="space-y-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab}>
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="basic">基本信息</TabsTrigger>
+              <TabsTrigger value="images">产品图片</TabsTrigger>
+              <TabsTrigger value="model">3D模型预览</TabsTrigger>
+            </TabsList>
+            <TabsContent value="basic" className="mt-4">
               <BasicInfoPanel node={node} />
-              {/* Attribute table inline */}
-              {node.attributes && node.attributes.length > 0 && (
-                <AttributeTable node={node} />
-              )}
-            </div>
-            {/* Right column: images + 3D stacked */}
-            <div className="space-y-4">
+            </TabsContent>
+            <TabsContent value="images" className="mt-4">
               <ProductImagesPanel node={node} />
+            </TabsContent>
+            <TabsContent value="model" className="mt-4">
               <ModelPanel />
+            </TabsContent>
+          </Tabs>
+
+          {node.attributes && node.attributes.length > 0 && (
+            <div className="mt-4">
+              <AttributeTable node={node} />
             </div>
-          </div>
-
-          {/* Narrower screens: tabs layout */}
-          <div className="xl:hidden">
-            <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="w-full justify-start">
-                <TabsTrigger value="basic">基本信息</TabsTrigger>
-                <TabsTrigger value="images">产品图片</TabsTrigger>
-                <TabsTrigger value="model">3D模型预览</TabsTrigger>
-              </TabsList>
-              <TabsContent value="basic" className="mt-4">
-                <BasicInfoPanel node={node} />
-              </TabsContent>
-              <TabsContent value="images" className="mt-4">
-                <ProductImagesPanel node={node} />
-              </TabsContent>
-              <TabsContent value="model" className="mt-4">
-                <ModelPanel />
-              </TabsContent>
-            </Tabs>
-
-            {/* Attribute table below tabs on narrow */}
-            {node.attributes && node.attributes.length > 0 && (
-              <div className="mt-4">
-                <AttributeTable node={node} />
-              </div>
-            )}
-          </div>
+          )}
         </>
       ) : (
         /* Level 1-5 */
