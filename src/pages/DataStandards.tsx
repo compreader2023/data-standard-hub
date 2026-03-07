@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CategoryTree from "@/components/CategoryTree";
 import CategoryDetail from "@/components/CategoryDetail";
-import { categoryTree, type CategoryNode, findNodeByCode, getPathToNode } from "@/data/categories";
+import { categoryTree, type CategoryNode } from "@/data/categories";
 
 export default function DataStandards() {
   const [selectedNode, setSelectedNode] = useState<CategoryNode | null>(null);
@@ -19,20 +19,20 @@ export default function DataStandards() {
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <div className="flex-1 flex flex-col md:flex-row">
+      <div className="flex-1 flex flex-col md:flex-row" style={{ height: "calc(100vh - 64px)" }}>
         {/* Sidebar */}
         <aside
           className={`${
             sidebarOpen ? "w-full md:w-80 lg:w-96" : "w-0"
           } transition-all duration-300 border-r border-border bg-card shrink-0 overflow-hidden flex flex-col`}
         >
-          <div className="p-4 border-b border-border">
+          <div className="p-4 border-b border-border shrink-0">
             <h3 className="text-sm font-semibold text-foreground mb-3">产品分类目录</h3>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="搜索分类..."
+                placeholder="搜索分类与产品..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
@@ -57,7 +57,7 @@ export default function DataStandards() {
           {sidebarOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
         </button>
 
-        {/* Main content */}
+        {/* Main content - independent scroll */}
         <main className="flex-1 overflow-y-auto">
           <div className="p-4 md:p-6 lg:p-8 max-w-5xl">
             {selectedNode ? (

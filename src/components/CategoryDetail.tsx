@@ -1,7 +1,8 @@
-import { Edit, Plus, Download, FileEdit } from "lucide-react";
+import { Edit, Plus, Download, FileEdit, Share2, Image, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { CategoryNode } from "@/data/categories";
 import { getFullCode, getPathToNode, categoryTree } from "@/data/categories";
+import productSample from "@/assets/product-sample.jpg";
 
 interface Props {
   node: CategoryNode;
@@ -29,31 +30,56 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
         ))}
       </nav>
 
+      {/* Product Image & 3D Preview (level 6 only) */}
+      {isProduct && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="detail-section !mb-0">
+            <div className="flex items-center gap-2 mb-3">
+              <Image className="h-4 w-4 text-muted-foreground" />
+              <h3 className="text-sm font-medium text-muted-foreground">产品图片</h3>
+            </div>
+            <div className="rounded-lg overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
+              <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
+            </div>
+          </div>
+          <div className="detail-section !mb-0">
+            <div className="flex items-center gap-2 mb-3">
+              <Box className="h-4 w-4 text-muted-foreground" />
+              <h3 className="text-sm font-medium text-muted-foreground">3D模型预览</h3>
+            </div>
+            <div className="rounded-lg bg-muted aspect-[4/3] flex items-center justify-center">
+              <div className="text-center text-muted-foreground">
+                <Box className="h-12 w-12 mx-auto mb-2 opacity-30" />
+                <p className="text-xs">3D模型加载区域</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Basic Info */}
       <div className="detail-section">
         <div className="flex items-start justify-between mb-4">
           <h2 className="text-lg font-semibold text-foreground">基本信息</h2>
           <div className="flex gap-2">
             <Button variant="outline" size="sm">
-              <Edit className="h-3.5 w-3.5 mr-1" /> 修改
+              <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
             </Button>
             {!isProduct && (
-              <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground">
+              <Button variant="ghost" size="sm" className="text-muted-foreground">
                 <Plus className="h-3.5 w-3.5 mr-1" /> 添加子级
               </Button>
             )}
           </div>
         </div>
 
+        {/* Prominent name */}
+        <div className="mb-4 pb-4 border-b border-border">
+          <h3 className="text-xl md:text-2xl font-bold text-primary">{node.name}</h3>
+          <p className="text-sm font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
+        </div>
+
         <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
-          <div>
-            <dt className="text-muted-foreground mb-0.5">编码</dt>
-            <dd className="font-mono text-foreground">{getFullCode(node.code)}</dd>
-          </div>
-          <div>
-            <dt className="text-muted-foreground mb-0.5">名称</dt>
-            <dd className="text-foreground font-medium">{node.name}</dd>
-          </div>
           <div className="md:col-span-2">
             <dt className="text-muted-foreground mb-0.5">描述</dt>
             <dd className="text-foreground">{node.description || "暂无描述"}</dd>
@@ -116,12 +142,15 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
         <div className="detail-section">
           <div className="flex items-start justify-between mb-4">
             <h2 className="text-lg font-semibold text-foreground">属性列表</h2>
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <Button variant="outline" size="sm">
                 <FileEdit className="h-3.5 w-3.5 mr-1" /> 申请修改
               </Button>
               <Button variant="outline" size="sm">
                 <Download className="h-3.5 w-3.5 mr-1" /> 下载
+              </Button>
+              <Button variant="outline" size="sm" className="text-primary border-primary hover:bg-primary hover:text-primary-foreground">
+                <Share2 className="h-3.5 w-3.5 mr-1" /> API同步
               </Button>
             </div>
           </div>
