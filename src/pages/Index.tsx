@@ -299,25 +299,7 @@ export default function Index() {
       </section>
 
       {/* Experts */}
-      <section className="py-16 md:py-20 section-alt">
-        <div className="container">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">行业权威专家</h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {experts.map((expert, i) => (
-              <div key={i} className="text-center">
-                <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-2xl font-bold mx-auto mb-3">
-                  {expert.name.charAt(0)}
-                </div>
-                <h3 className="font-semibold text-foreground">{expert.name}</h3>
-                <p className="text-xs text-muted-foreground mt-1">{expert.org}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ExpertsCarousel experts={experts} />
 
       {/* Partners */}
       <section className="py-16 md:py-20">
