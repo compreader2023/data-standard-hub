@@ -24,7 +24,7 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <div className="rounded-lg overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
+      <div className="rounded-lg overflow-hidden bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
         <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
       </div>
     </div>
