@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Edit, Plus, Download, FileEdit, Share2, Image, Box } from "lucide-react";
+import { Edit, Plus, Download, FileEdit, Share2, Image, Box, ChevronLeft, ChevronRight, ZoomIn, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import type { CategoryNode } from "@/data/categories";
 import { getFullCode, getPathToNode, categoryTree } from "@/data/categories";
 import productSample from "@/assets/product-sample.jpg";
@@ -11,8 +12,17 @@ interface Props {
   onNavigate: (node: CategoryNode) => void;
 }
 
+// Mock multiple product images
+const productImages = [productSample, productSample, productSample];
+
 /* Shared panel for product images */
 function ProductImagesPanel({ node }: { node: CategoryNode }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const prevImage = () => setCurrentIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  const nextImage = () => setCurrentIndex((prev) => (prev + 1) % productImages.length);
+
   return (
     <div className="detail-section">
       <div className="flex items-start justify-between mb-4">
@@ -24,32 +34,112 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <div className="rounded-lg overflow-hidden bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
-        <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
+      <div className="relative group max-w-md">
+        <div
+          className="rounded-lg overflow-hidden bg-white aspect-[16/9] flex items-center justify-center cursor-pointer"
+          onClick={() => setLightboxOpen(true)}
+        >
+          <img src={productImages[currentIndex]} alt={node.name} className="w-full h-full object-contain" />
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10">
+            <ZoomIn className="h-6 w-6 text-foreground/70" />
+          </div>
+        </div>
+        {productImages.length > 1 && (
+          <>
+            <button onClick={(e) => { e.stopPropagation(); prevImage(); }} className="absolute left-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background/70 hover:bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button onClick={(e) => { e.stopPropagation(); nextImage(); }} className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background/70 hover:bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <ChevronRight className="h-4 w-4" />
+            </button>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-muted-foreground bg-background/70 px-2 py-0.5 rounded">
+              {currentIndex + 1} / {productImages.length}
+            </div>
+          </>
+        )}
       </div>
+
+      {/* Lightbox */}
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-3xl p-2 bg-white">
+          <DialogTitle className="sr-only">产品图片预览</DialogTitle>
+          <div className="relative flex items-center justify-center">
+            <img src={productImages[currentIndex]} alt={node.name} className="max-h-[80vh] object-contain" />
+            {productImages.length > 1 && (
+              <>
+                <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 hover:bg-background flex items-center justify-center shadow">
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-background/80 hover:bg-background flex items-center justify-center shadow">
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </>
+            )}
+          </div>
+          <div className="text-center text-xs text-muted-foreground mt-1">
+            {currentIndex + 1} / {productImages.length}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
 
 /* Shared panel for 3D model */
 function ModelPanel() {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  const handleDownload = () => {
+    // In real app, check login status first
+    alert("下载3D模型需要登录，请先登录后再试。");
+  };
+
   return (
     <div className="detail-section">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-2">
           <Box className="h-4 w-4 text-muted-foreground" />
-          <h2 className="text-lg font-semibold text-foreground">3D模型预览</h2>
+          <h2 className="text-lg font-semibold text-foreground">3D模型</h2>
         </div>
-        <Button variant="outline" size="sm">
-          <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={handleDownload}>
+            <Download className="h-3.5 w-3.5 mr-1" /> 下载模型
+          </Button>
+          <Button variant="outline" size="sm">
+            <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
+          </Button>
+        </div>
       </div>
-      <div className="rounded-lg bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
+      <div
+        className="rounded-lg bg-white aspect-[16/9] max-w-md flex items-center justify-center cursor-pointer group relative"
+        onClick={() => setLightboxOpen(true)}
+      >
         <div className="text-center text-muted-foreground">
           <Box className="h-10 w-10 mx-auto mb-2 opacity-30" />
           <p className="text-xs">3D模型加载区域</p>
         </div>
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 rounded-lg">
+          <ZoomIn className="h-6 w-6 text-foreground/70" />
+        </div>
       </div>
+
+      {/* 3D Model Lightbox */}
+      <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
+        <DialogContent className="max-w-4xl p-4 bg-white">
+          <DialogTitle className="sr-only">3D模型预览</DialogTitle>
+          <div className="aspect-[16/9] flex items-center justify-center bg-muted/20 rounded-lg">
+            <div className="text-center text-muted-foreground">
+              <Box className="h-16 w-16 mx-auto mb-3 opacity-30" />
+              <p className="text-sm">3D模型全屏预览区域</p>
+            </div>
+          </div>
+          <div className="flex justify-end mt-2">
+            <Button variant="outline" size="sm" onClick={handleDownload}>
+              <Download className="h-3.5 w-3.5 mr-1" /> 下载模型
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
