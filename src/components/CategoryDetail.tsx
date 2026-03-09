@@ -24,7 +24,7 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <div className="rounded-lg overflow-hidden bg-muted aspect-[4/3] flex items-center justify-center">
+      <div className="rounded-lg overflow-hidden bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
         <img src={productSample} alt={node.name} className="w-full h-full object-contain" />
       </div>
     </div>
@@ -44,9 +44,9 @@ function ModelPanel() {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <div className="rounded-lg bg-muted aspect-[4/3] flex items-center justify-center">
+      <div className="rounded-lg bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
         <div className="text-center text-muted-foreground">
-          <Box className="h-12 w-12 mx-auto mb-2 opacity-30" />
+          <Box className="h-10 w-10 mx-auto mb-2 opacity-30" />
           <p className="text-xs">3D模型加载区域</p>
         </div>
       </div>
@@ -182,10 +182,10 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
                 className="text-left p-3 rounded-md border border-border hover:border-primary hover:bg-accent transition-colors group"
                 onClick={() => onNavigate(child)}
               >
-                <div className="text-xs font-mono text-muted-foreground mb-1">{getFullCode(child.code)}</div>
-                <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-1">
                   {child.name}
                 </div>
+                <div className="text-xs font-mono text-muted-foreground">{getFullCode(child.code)}</div>
                 {child.children && child.children.length > 0 && (
                   <div className="text-xs text-muted-foreground mt-1">
                     {child.children.length} 个子项
