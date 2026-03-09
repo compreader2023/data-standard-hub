@@ -102,8 +102,8 @@ export const categoryTree: CategoryNode[] = [
                     name: "黄玉米",
                     description: "种皮为黄色，并包括略带红色的黄色玉米；专用玉米除外",
                     children: [
-                      { code: "0.1.1.2.1.011", level: 6, name: "黄马齿型玉米", description: "", version: "V1.0", applicationExample: "", expertGroup: "谷物标准专家组", attributes: sampleAttributes },
-                      { code: "0.1.1.2.1.012", level: 6, name: "黄硬粒型玉米", description: "", version: "V1.0", applicationExample: "", expertGroup: "谷物标准专家组", attributes: sampleAttributes },
+                      { code: "0.1.1.2.1.011", level: 6, name: "黄马齿型玉米", description: "", version: "V1.0", applicationExample: "https://demoidc.yangben.cn/", expertGroup: "谷物标准专家组", attributes: sampleAttributes },
+                      { code: "0.1.1.2.1.012", level: 6, name: "黄硬粒型玉米", description: "", version: "V1.0", applicationExample: "https://demoidc.yangben.cn/", expertGroup: "谷物标准专家组", attributes: sampleAttributes },
                     ],
                   },
                   { code: "0.1.1.2.2", level: 5, name: "白玉米", description: "种皮为白色，并包括略带淡黄色或粉红色的白色玉米", children: [] },

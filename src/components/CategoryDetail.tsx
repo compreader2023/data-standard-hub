@@ -44,9 +44,9 @@ function ModelPanel() {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <div className="rounded-lg bg-muted aspect-[4/3] flex items-center justify-center">
+      <div className="rounded-lg bg-white aspect-[16/9] max-w-md flex items-center justify-center border border-border">
         <div className="text-center text-muted-foreground">
-          <Box className="h-12 w-12 mx-auto mb-2 opacity-30" />
+          <Box className="h-10 w-10 mx-auto mb-2 opacity-30" />
           <p className="text-xs">3D模型加载区域</p>
         </div>
       </div>
