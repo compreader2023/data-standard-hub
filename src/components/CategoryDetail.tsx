@@ -219,7 +219,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
             <TabsList className="w-full justify-start">
               <TabsTrigger value="basic">基本信息</TabsTrigger>
               <TabsTrigger value="images">产品图片</TabsTrigger>
-              <TabsTrigger value="model">3D模型预览</TabsTrigger>
+              <TabsTrigger value="model">3D模型</TabsTrigger>
             </TabsList>
             <TabsContent value="basic" className="mt-4">
               <BasicInfoPanel node={node} />
