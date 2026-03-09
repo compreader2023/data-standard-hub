@@ -97,41 +97,43 @@ const experts = [
 const partners = ["中国石油", "中国石化", "中国海油", "国家管网", "中国化学", "中国中冶", "华能集团"];
 
 function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[] }) {
-  const [currentPage, setCurrentPage] = useState(0);
   const [visibleCount, setVisibleCount] = useState(4);
+  const [displayedExperts, setDisplayedExperts] = useState<{ name: string; org: string }[]>([]);
+  const [fading, setFading] = useState(false);
 
   useEffect(() => {
     const updateVisibleCount = () => {
       const width = window.innerWidth;
-      if (width < 640) {
-        setVisibleCount(2);
-      } else if (width < 768) {
-        setVisibleCount(3);
-      } else if (width < 1024) {
-        setVisibleCount(4);
-      } else {
-        setVisibleCount(5);
-      }
+      if (width < 640) setVisibleCount(2);
+      else if (width < 768) setVisibleCount(3);
+      else if (width < 1024) setVisibleCount(4);
+      else setVisibleCount(5);
     };
-    
     updateVisibleCount();
     window.addEventListener('resize', updateVisibleCount);
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
 
-  const totalPages = Math.ceil(experts.length / visibleCount);
-  
+  // Pick random experts
+  const pickRandom = useCallback((count: number) => {
+    const shuffled = [...experts].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  }, [experts]);
+
+  useEffect(() => {
+    setDisplayedExperts(pickRandom(visibleCount));
+  }, [visibleCount, pickRandom]);
+
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentPage((prev) => (prev + 1) % totalPages);
+      setFading(true);
+      setTimeout(() => {
+        setDisplayedExperts(pickRandom(visibleCount));
+        setFading(false);
+      }, 400);
     }, 5000);
     return () => clearInterval(timer);
-  }, [totalPages]);
-
-  const visibleExperts = experts.slice(
-    currentPage * visibleCount,
-    currentPage * visibleCount + visibleCount
-  );
+  }, [visibleCount, pickRandom]);
 
   return (
     <section className="py-16 md:py-20 section-alt">
@@ -139,10 +141,14 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
         <div className="text-center mb-12">
           <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">行业权威专家</h2>
+          <p className="text-sm text-muted-foreground mt-2">从上千位行业专家中随机展示</p>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {visibleExperts.map((expert, i) => (
-            <div key={`${currentPage}-${i}`} className="text-center animate-fade-in">
+        <div
+          className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
+          style={{ transitionDuration: "400ms" }}
+        >
+          {displayedExperts.map((expert, i) => (
+            <div key={`${expert.name}-${i}`} className="text-center">
               <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center text-primary-foreground text-2xl font-bold mx-auto mb-3">
                 {expert.name.charAt(0)}
               </div>
@@ -151,17 +157,6 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
             </div>
           ))}
         </div>
-        {totalPages > 1 && (
-          <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentPage(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${i === currentPage ? "bg-primary" : "bg-muted-foreground/30"}`}
-              />
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
