@@ -438,7 +438,7 @@ export default function Index() {
       <section className="py-16 md:py-20 section-alt">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">核心功能</span>
+            <span className="text-secondary font-semibold text-base mb-2 block">核心功能</span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">一站式产品数据服务</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
