@@ -336,7 +336,7 @@ export default function Index() {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
                 {banner.title}
               </h1>
-              <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8">
+               <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8">
                 {banner.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
