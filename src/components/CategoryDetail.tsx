@@ -404,7 +404,7 @@ function AttributeTable({ node }: { node: CategoryNode }) {
                 <td className="px-3 py-2.5 border-b border-border">{attr.name}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.type}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.unitCodeName}</td>
-                <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-xs leading-relaxed">{attr.values}</td>
+                <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-sm leading-relaxed">{attr.values}</td>
               </tr>
             ))}
           </tbody>
