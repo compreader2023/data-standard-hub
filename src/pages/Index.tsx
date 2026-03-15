@@ -304,7 +304,8 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
 
 export default function Index() {
   const [currentBanner, setCurrentBanner] = useState(0);
-
+  const [joinDialogOpen, setJoinDialogOpen] = useState(false);
+  const [joinDefaultType, setJoinDefaultType] = useState("");
   const nextBanner = useCallback(() => {
     setCurrentBanner((prev) => (prev + 1) % banners.length);
   }, []);
