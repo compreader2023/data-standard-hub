@@ -475,7 +475,7 @@ export default function Index() {
                   </div>
                   <h3 className="font-semibold text-foreground">{cat.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {cat.partners.map((p, pi) => (
