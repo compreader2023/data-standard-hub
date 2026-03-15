@@ -268,7 +268,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
   return (
     <div className="space-y-4">
       {/* Breadcrumb */}
-      <nav className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground mb-2">
+      <nav className="flex flex-wrap items-center gap-1 text-base text-muted-foreground mb-2">
         {path.map((p, i) => (
           <span key={p.code} className="flex items-center gap-1">
             {i > 0 && <span className="mx-1">/</span>}
