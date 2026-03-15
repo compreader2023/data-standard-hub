@@ -279,9 +279,9 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
     <section className="py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
+          <span className="text-secondary font-semibold text-base mb-2 block">CPMS专家库</span>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">行业权威专家</h2>
-          <p className="text-sm text-muted-foreground mt-2">从上千位行业专家中随机展示</p>
+          <p className="text-base text-muted-foreground mt-2">从上千位行业专家中随机展示</p>
         </div>
         <div
           className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
