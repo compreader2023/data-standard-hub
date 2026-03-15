@@ -459,6 +459,57 @@ export default function Index() {
         </div>
       </section>
 
+      {/* CPMS 生态合作伙伴体系 */}
+      <section className="py-16 md:py-20">
+        <div className="container">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-semibold text-sm mb-2 block">生态共建</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">CPMS 生态合作伙伴体系</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {partnerCategories.map((cat, i) => (
+              <div key={i} className="bg-card border border-border rounded-lg p-6 flex flex-col">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
+                    <cat.icon className="h-5 w-5 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-foreground">{cat.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
+                <div className="flex-1">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {cat.partners.map((p, pi) => (
+                      <a
+                        key={pi}
+                        href={p.url}
+                        target={p.url !== "#" ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
+                      >
+                        {p.name}
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full mt-auto"
+                  onClick={() => { setJoinDefaultType(cat.title); setJoinDialogOpen(true); }}
+                >
+                  <UserPlus className="h-4 w-4 mr-1" />
+                  加入我们
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Join Partner Dialog */}
+      <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
+
       {/* News Section - Policy + Industry side by side */}
       <section className="py-16 md:py-20">
         <div className="container">
