@@ -484,7 +484,7 @@ export default function Index() {
                         href={p.url}
                         target={p.url !== "#" ? "_blank" : undefined}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
+                        className="inline-flex items-center gap-1 text-base text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
                       >
                         {p.name}
                         <ExternalLink className="h-3 w-3" />
