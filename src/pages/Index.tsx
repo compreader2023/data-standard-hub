@@ -537,7 +537,7 @@ export default function Index() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-foreground">行业动态</h2>
-                <Link to="/news" className="text-sm text-secondary hover:underline">更多 &gt;&gt;</Link>
+                <Link to="/news" className="text-base text-secondary hover:underline">更多 &gt;&gt;</Link>
               </div>
               <div className="space-y-4">
                 {industryNews.map((item, i) => (
