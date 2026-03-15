@@ -385,7 +385,7 @@ function AttributeTable({ node }: { node: CategoryNode }) {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full text-base">
           <thead>
             <tr className="bg-primary text-primary-foreground">
               <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tl-md">序号</th>
