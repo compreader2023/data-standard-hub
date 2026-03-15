@@ -120,7 +120,7 @@ export default function DataStandards() {
                       <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm mb-2">
                         {cat.code}
                       </div>
-                      <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      <div className="text-base font-medium text-foreground group-hover:text-primary transition-colors">
                         {cat.name}
                       </div>
                     </button>
