@@ -1,7 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Database, ShieldCheck, Search, ArrowRight, FileCheck, PlayCircle, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import { Database, ShieldCheck, Search, ArrowRight, FileCheck, PlayCircle, ChevronLeft, ChevronRight, Volume2, Users, Award, Cpu, UserPlus, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import banner1 from "@/assets/banner-1.jpg";
@@ -96,6 +102,140 @@ const experts = [
 
 const partners = ["中国石油", "中国石化", "中国海油", "国家管网", "中国化学", "中国中冶", "华能集团"];
 
+const partnerCategories = [
+  {
+    icon: Users,
+    title: "区域推广合作伙伴",
+    desc: "凭借地域资源与渠道优势，为 CPMS 体系开展地域性市场推广，推动标准体系在各地的落地与普及。",
+    partners: [
+      { name: "浙江数据中心", url: "#" },
+      { name: "1688", url: "https://www.1688.com" },
+    ],
+  },
+  {
+    icon: Award,
+    title: "认证服务合作伙伴",
+    desc: "依托专业资质与行业能力，助力企业完成 CPMS 产品数据标准符合性认证，为认证工作提供专业支撑。",
+    partners: [
+      { name: "四川大数据联合会", url: "#" },
+    ],
+  },
+  {
+    icon: Cpu,
+    title: "技术服务合作伙伴",
+    desc: "聚焦软件技术服务领域，为 CPMS 平台提供核心技术支撑与技术服务，保障平台高效稳定运行。",
+    partners: [
+      { name: "京品冠天成科技有限公司", url: "#" },
+      { name: "杭州炽橙数字科技有限公司", url: "#" },
+      { name: "美林数据技术股份有限公司", url: "#" },
+    ],
+  },
+];
+
+const partnerTypeLabels = ["区域推广合作伙伴", "认证服务合作伙伴", "技术服务合作伙伴"];
+const cpmsKnowledgeLevels = ["非常了解", "比较了解", "不了解"];
+
+function JoinPartnerDialog({ open, onOpenChange, defaultType }: { open: boolean; onOpenChange: (v: boolean) => void; defaultType?: string }) {
+  const { toast } = useToast();
+  const [form, setForm] = useState({
+    name: "",
+    title: "",
+    email: "",
+    phone: "",
+    company: "",
+    partnerType: defaultType || partnerTypeLabels[0],
+    cpmsKnowledge: "比较了解",
+    info: "",
+  });
+  const [phoneError, setPhoneError] = useState("");
+
+  useEffect(() => {
+    if (defaultType) setForm(f => ({ ...f, partnerType: defaultType }));
+  }, [defaultType]);
+
+  const validatePhone = (phone: string) => /^1[3-9]\d{9}$/.test(phone);
+
+  const handleSubmit = () => {
+    if (!form.name || !form.phone || !form.company || !form.email) {
+      toast({ title: "请填写必填项", description: "姓名、手机号、Email和单位名称为必填项", variant: "destructive" });
+      return;
+    }
+    if (!validatePhone(form.phone)) {
+      setPhoneError("请输入正确的11位手机号");
+      return;
+    }
+    setPhoneError("");
+    toast({ title: "提交成功", description: "感谢您的申请，我们将尽快与您联系！" });
+    onOpenChange(false);
+    setForm({ name: "", title: "", email: "", phone: "", company: "", partnerType: partnerTypeLabels[0], cpmsKnowledge: "比较了解", info: "" });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>加入 CPMS 生态合作伙伴</DialogTitle>
+          <DialogDescription>请填写以下信息，我们将尽快与您取得联系。</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 mt-2">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label>姓名 <span className="text-destructive">*</span></Label>
+              <Input className="mt-1" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="请输入姓名" />
+            </div>
+            <div>
+              <Label>职务</Label>
+              <Input className="mt-1" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} placeholder="请输入职务" />
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Label>Email <span className="text-destructive">*</span></Label>
+              <Input className="mt-1" type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="请输入Email" />
+            </div>
+            <div>
+              <Label>手机号 <span className="text-destructive">*</span></Label>
+              <Input className="mt-1" value={form.phone} onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setPhoneError(""); }} placeholder="请输入手机号" />
+              {phoneError && <p className="text-xs text-destructive mt-1">{phoneError}</p>}
+            </div>
+          </div>
+          <div>
+            <Label>单位名称 <span className="text-destructive">*</span></Label>
+            <Input className="mt-1" value={form.company} onChange={e => setForm(f => ({ ...f, company: e.target.value }))} placeholder="请输入单位名称" />
+          </div>
+          <div>
+            <Label>伙伴类型</Label>
+            <RadioGroup className="mt-2" value={form.partnerType} onValueChange={v => setForm(f => ({ ...f, partnerType: v }))}>
+              {partnerTypeLabels.map(t => (
+                <div key={t} className="flex items-center space-x-2">
+                  <RadioGroupItem value={t} id={`pt-${t}`} />
+                  <Label htmlFor={`pt-${t}`} className="font-normal cursor-pointer">{t}</Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+          <div>
+            <Label>您是否了解CPMS</Label>
+            <RadioGroup className="mt-2" value={form.cpmsKnowledge} onValueChange={v => setForm(f => ({ ...f, cpmsKnowledge: v }))}>
+              {cpmsKnowledgeLevels.map(l => (
+                <div key={l} className="flex items-center space-x-2">
+                  <RadioGroupItem value={l} id={`ck-${l}`} />
+                  <Label htmlFor={`ck-${l}`} className="font-normal cursor-pointer">{l}</Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+          <div>
+            <Label>您希望进一步了解的信息</Label>
+            <Textarea className="mt-1" value={form.info} onChange={e => setForm(f => ({ ...f, info: e.target.value }))} placeholder="请输入您想了解的内容" rows={3} />
+          </div>
+          <Button className="w-full" onClick={handleSubmit}>确认提交</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[] }) {
   const [visibleCount, setVisibleCount] = useState(4);
   const [displayedExperts, setDisplayedExperts] = useState<{ name: string; org: string }[]>([]);
@@ -164,7 +304,8 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
 
 export default function Index() {
   const [currentBanner, setCurrentBanner] = useState(0);
-
+  const [joinDialogOpen, setJoinDialogOpen] = useState(false);
+  const [joinDefaultType, setJoinDefaultType] = useState("");
   const nextBanner = useCallback(() => {
     setCurrentBanner((prev) => (prev + 1) % banners.length);
   }, []);
@@ -317,6 +458,57 @@ export default function Index() {
           </div>
         </div>
       </section>
+
+      {/* CPMS 生态合作伙伴体系 */}
+      <section className="py-16 md:py-20">
+        <div className="container">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-semibold text-sm mb-2 block">生态共建</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">CPMS 生态合作伙伴体系</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {partnerCategories.map((cat, i) => (
+              <div key={i} className="bg-card border border-border rounded-lg p-6 flex flex-col">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
+                    <cat.icon className="h-5 w-5 text-accent-foreground" />
+                  </div>
+                  <h3 className="font-semibold text-foreground">{cat.title}</h3>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
+                <div className="flex-1">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {cat.partners.map((p, pi) => (
+                      <a
+                        key={pi}
+                        href={p.url}
+                        target={p.url !== "#" ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-sm text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
+                      >
+                        {p.name}
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full mt-auto"
+                  onClick={() => { setJoinDefaultType(cat.title); setJoinDialogOpen(true); }}
+                >
+                  <UserPlus className="h-4 w-4 mr-1" />
+                  加入我们
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Join Partner Dialog */}
+      <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
 
       {/* News Section - Policy + Industry side by side */}
       <section className="py-16 md:py-20">
