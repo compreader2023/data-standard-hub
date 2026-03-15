@@ -511,7 +511,7 @@ export default function Index() {
       <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
 
       {/* News Section - Policy + Industry side by side */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 section-alt">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Policy News */}
