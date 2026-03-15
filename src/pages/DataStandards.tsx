@@ -117,7 +117,7 @@ export default function DataStandards() {
                       className="text-left p-4 rounded-lg border border-border hover:border-primary hover:bg-accent transition-colors group"
                       onClick={() => handleSelect(cat)}
                     >
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs mb-2">
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm mb-2">
                         {cat.code}
                       </div>
                       <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
