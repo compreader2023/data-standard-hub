@@ -185,7 +185,7 @@ function ModelPanel() {
           <div className="relative aspect-[16/9] flex items-center justify-center bg-muted/20 rounded-lg">
             <div className="text-center text-muted-foreground">
               <Box className="h-16 w-16 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">{modelItems[currentIndex].label} - 全屏预览区域</p>
+              <p className="text-base">{modelItems[currentIndex].label} - 全屏预览区域</p>
             </div>
             {modelItems.length > 1 && (
               <>
