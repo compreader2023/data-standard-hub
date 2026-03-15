@@ -353,7 +353,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
                 </div>
                 <div className="text-sm font-mono text-muted-foreground">{getFullCode(child.code)}</div>
                 {child.children && child.children.length > 0 && (
-                  <div className="text-xs text-muted-foreground mt-1">
+                  <div className="text-sm text-muted-foreground mt-1">
                     {child.children.length} 个子项
                   </div>
                 )}
