@@ -351,7 +351,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
                 <div className="text-base font-medium text-foreground group-hover:text-primary transition-colors mb-1">
                   {child.name}
                 </div>
-                <div className="text-xs font-mono text-muted-foreground">{getFullCode(child.code)}</div>
+                <div className="text-sm font-mono text-muted-foreground">{getFullCode(child.code)}</div>
                 {child.children && child.children.length > 0 && (
                   <div className="text-xs text-muted-foreground mt-1">
                     {child.children.length} 个子项
