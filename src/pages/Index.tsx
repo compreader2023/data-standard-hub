@@ -100,7 +100,7 @@ const experts = [
   { name: "杨静", org: "中国电力建设集团有限公司" },
 ];
 
-const partners = ["中国石油", "中国石化", "中国海油", "国家管网", "中国化学", "中国中冶", "华能集团"];
+
 
 const partnerCategories = [
   {
@@ -559,22 +559,6 @@ export default function Index() {
       {/* Experts */}
       <ExpertsCarousel experts={experts} />
 
-      {/* Partners */}
-      <section className="py-16 md:py-20">
-        <div className="container">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">合作伙伴</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">行业领军企业信赖之选</h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-6">
-            {partners.map((name, i) => (
-              <div key={i} className="bg-card border border-border rounded-lg px-8 py-5 text-sm font-medium text-foreground card-elevated">
-                {name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
