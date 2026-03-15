@@ -110,7 +110,7 @@
     border-bottom: 2px solid hsl(var(--secondary));
   }
   .tree-item {
-    @apply cursor-pointer px-3 py-2 rounded-md text-sm transition-colors duration-150;
+    @apply cursor-pointer px-3 py-2 rounded-md text-base transition-colors duration-150;
   }
   .tree-item:hover {
     @apply bg-accent;
