@@ -24,7 +24,7 @@ export default function DataStandards() {
   const TreeSidebar = (
     <>
       <div className="p-4 border-b border-border shrink-0">
-        <h3 className="text-sm font-semibold text-foreground mb-3">产品主数据分类目录</h3>
+        <h3 className="text-base font-semibold text-foreground mb-3">产品主数据分类目录</h3>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
@@ -32,7 +32,7 @@ export default function DataStandards() {
             placeholder="搜索分类与产品..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 text-sm rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full pl-9 pr-3 py-2 text-base rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function DataStandards() {
               </SheetContent>
             </Sheet>
             {selectedNode && (
-              <span className="text-sm text-muted-foreground truncate">
+              <span className="text-base text-muted-foreground truncate">
                 当前: {selectedNode.name}
               </span>
             )}
@@ -117,10 +117,10 @@ export default function DataStandards() {
                       className="text-left p-4 rounded-lg border border-border hover:border-primary hover:bg-accent transition-colors group"
                       onClick={() => handleSelect(cat)}
                     >
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs mb-2">
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-sm mb-2">
                         {cat.code}
                       </div>
-                      <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      <div className="text-base font-medium text-foreground group-hover:text-primary transition-colors">
                         {cat.name}
                       </div>
                     </button>

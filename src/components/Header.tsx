@@ -24,7 +24,7 @@ export default function Header() {
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-3 shrink-0">
           <img src={cpmsLogo} alt="CPMS Logo" className="h-9 w-auto brightness-0 invert" />
-          <span className="hidden sm:inline text-primary-foreground font-semibold text-sm">产品主数据标准服务平台</span>
+          <span className="hidden sm:inline text-primary-foreground font-semibold text-base">产品主数据标准服务平台</span>
         </Link>
 
         {/* Desktop nav */}
@@ -33,7 +33,7 @@ export default function Header() {
             <Link
               key={item.path}
               to={item.path}
-              className={`nav-link text-primary-foreground/90 hover:text-secondary text-xs xl:text-sm ${
+              className={`nav-link text-primary-foreground/90 hover:text-secondary text-sm xl:text-base ${
                 location.pathname === item.path ? "active text-secondary" : ""
               }`}
             >
@@ -44,11 +44,11 @@ export default function Header() {
 
         {/* Auth buttons */}
         <div className="hidden lg:flex items-center gap-2">
-          <a href="#" className="flex items-center gap-1 text-xs text-primary-foreground/70 hover:text-secondary transition-colors">
+          <a href="#" className="flex items-center gap-1 text-sm text-primary-foreground/70 hover:text-secondary transition-colors">
             <LogIn className="h-3.5 w-3.5" />
             登录
           </a>
-          <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs h-8 px-4">
+          <Button size="sm" className="bg-secondary hover:bg-secondary/90 text-secondary-foreground text-sm h-8 px-4">
             免费注册
           </Button>
         </div>
@@ -70,7 +70,7 @@ export default function Header() {
             <Link
               key={item.path}
               to={item.path}
-              className={`block px-6 py-3 text-sm text-primary-foreground/90 hover:text-secondary hover:bg-sidebar-accent transition-colors ${
+              className={`block px-6 py-3 text-base text-primary-foreground/90 hover:text-secondary hover:bg-sidebar-accent transition-colors ${
                 location.pathname === item.path ? "text-secondary bg-sidebar-accent" : ""
               }`}
               onClick={() => setMobileOpen(false)}
@@ -79,8 +79,8 @@ export default function Header() {
             </Link>
           ))}
           <div className="px-6 pt-3 flex gap-3">
-            <a href="#" className="text-sm text-primary-foreground/70 hover:text-secondary">登录</a>
-            <a href="#" className="text-sm text-secondary font-semibold">免费注册</a>
+            <a href="#" className="text-base text-primary-foreground/70 hover:text-secondary">登录</a>
+            <a href="#" className="text-base text-secondary font-semibold">免费注册</a>
           </div>
         </nav>
       )}

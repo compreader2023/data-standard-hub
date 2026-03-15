@@ -50,7 +50,7 @@ function TreeItem({ node, depth, selectedCode, expandedCodes, onToggle, onSelect
           <Folder className="h-4 w-4 shrink-0 text-muted-foreground" />
         )}
 
-        <span className="truncate text-sm" title={`${getFullCode(node.code)} ${node.name}`}>
+        <span className="truncate text-base" title={`${getFullCode(node.code)} ${node.name}`}>
           {node.name}
         </span>
       </div>

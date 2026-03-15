@@ -279,9 +279,9 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
     <section className="py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
-          <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
+          <span className="text-secondary font-semibold text-base mb-2 block">CPMS专家库</span>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">行业权威专家</h2>
-          <p className="text-sm text-muted-foreground mt-2">从上千位行业专家中随机展示</p>
+          <p className="text-base text-muted-foreground mt-2">从上千位行业专家中随机展示</p>
         </div>
         <div
           className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
@@ -293,7 +293,7 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
                 {expert.name.charAt(0)}
               </div>
               <h3 className="font-semibold text-foreground">{expert.name}</h3>
-              <p className="text-xs text-muted-foreground mt-1">{expert.org}</p>
+              <p className="text-sm text-muted-foreground mt-1">{expert.org}</p>
             </div>
           ))}
         </div>
@@ -336,7 +336,7 @@ export default function Index() {
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
                 {banner.title}
               </h1>
-              <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8">
+               <p className="text-base md:text-lg text-primary-foreground/80 max-w-xl mb-8">
                 {banner.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -391,19 +391,19 @@ export default function Index() {
         <div className="container flex items-center gap-4">
           <div className="flex items-center gap-2 shrink-0">
             <Volume2 className="h-4 w-4 text-secondary" />
-            <span className="text-sm font-semibold text-foreground">公告</span>
+            <span className="text-base font-semibold text-foreground">公告</span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-6 text-base">
               {announcements.slice(0, 3).map((item, i) => (
                 <Link key={i} to="/news" className="whitespace-nowrap text-muted-foreground hover:text-primary transition-colors truncate">
-                  <span className="text-xs text-muted-foreground/60 mr-2">[{item.date}]</span>
+                  <span className="text-sm text-muted-foreground/60 mr-2">[{item.date}]</span>
                   {item.title}
                 </Link>
               ))}
             </div>
           </div>
-          <Link to="/news" className="text-xs text-secondary hover:underline shrink-0">更多</Link>
+          <Link to="/news" className="text-sm text-secondary hover:underline shrink-0">更多</Link>
         </div>
       </section>
 
@@ -412,7 +412,7 @@ export default function Index() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-secondary font-semibold text-sm mb-2 block">关于CPMS</span>
+              <span className="text-secondary font-semibold text-base mb-2 block">关于CPMS</span>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">构建工业产品数据标准生态</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 CPMS（China Product Master Standard）致力于建立统一的工业产品数据管理标准体系，覆盖工程建设全生命周期的产品数据需求。通过标准化的产品分类、属性定义和数据格式，实现产业链上下游的高效数据交换与共享。
@@ -438,7 +438,7 @@ export default function Index() {
       <section className="py-16 md:py-20 section-alt">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">核心功能</span>
+            <span className="text-secondary font-semibold text-base mb-2 block">核心功能</span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">一站式产品数据服务</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -452,7 +452,7 @@ export default function Index() {
                   <svc.icon className="h-6 w-6 text-accent-foreground group-hover:text-primary-foreground transition-colors" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2 text-lg">{svc.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{svc.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{svc.desc}</p>
               </Link>
             ))}
           </div>
@@ -463,7 +463,7 @@ export default function Index() {
       <section className="py-16 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">生态共建</span>
+            <span className="text-secondary font-semibold text-base mb-2 block">生态共建</span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">CPMS 生态合作伙伴体系</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -475,7 +475,7 @@ export default function Index() {
                   </div>
                   <h3 className="font-semibold text-foreground">{cat.title}</h3>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed mb-5">{cat.desc}</p>
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-4">
                     {cat.partners.map((p, pi) => (
@@ -484,7 +484,7 @@ export default function Index() {
                         href={p.url}
                         target={p.url !== "#" ? "_blank" : undefined}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
+                        className="inline-flex items-center gap-1 text-base text-primary hover:text-secondary transition-colors bg-accent/50 rounded px-3 py-1.5"
                       >
                         {p.name}
                         <ExternalLink className="h-3 w-3" />
@@ -518,16 +518,16 @@ export default function Index() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-foreground">政策指引</h2>
-                <Link to="/news" className="text-sm text-secondary hover:underline">更多 &gt;&gt;</Link>
+                 <Link to="/news" className="text-base text-secondary hover:underline">更多 &gt;&gt;</Link>
               </div>
               <div className="space-y-4">
                 {policyNews.map((item, i) => (
                   <Link key={i} to="/news" className="flex gap-4 card-elevated bg-card rounded-lg border border-border overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-28 h-24 object-cover shrink-0" />
                     <div className="py-3 pr-4">
-                      <span className="text-xs text-muted-foreground">{item.date}</span>
-                      <h3 className="font-semibold text-foreground mt-1 mb-1 text-sm line-clamp-1">{item.title}</h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2">{item.desc}</p>
+                       <span className="text-sm text-muted-foreground">{item.date}</span>
+                       <h3 className="font-semibold text-foreground mt-1 mb-1 text-base line-clamp-1">{item.title}</h3>
+                       <p className="text-sm text-muted-foreground line-clamp-2">{item.desc}</p>
                     </div>
                   </Link>
                 ))}
@@ -537,16 +537,16 @@ export default function Index() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-bold text-foreground">行业动态</h2>
-                <Link to="/news" className="text-sm text-secondary hover:underline">更多 &gt;&gt;</Link>
+                <Link to="/news" className="text-base text-secondary hover:underline">更多 &gt;&gt;</Link>
               </div>
               <div className="space-y-4">
                 {industryNews.map((item, i) => (
                   <Link key={i} to="/news" className="flex gap-4 card-elevated bg-card rounded-lg border border-border overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-28 h-24 object-cover shrink-0" />
                     <div className="py-3 pr-4">
-                      <span className="text-xs text-muted-foreground">{item.date}</span>
-                      <h3 className="font-semibold text-foreground mt-1 mb-1 text-sm line-clamp-1">{item.title}</h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2">{item.desc}</p>
+                       <span className="text-sm text-muted-foreground">{item.date}</span>
+                       <h3 className="font-semibold text-foreground mt-1 mb-1 text-base line-clamp-1">{item.title}</h3>
+                       <p className="text-sm text-muted-foreground line-clamp-2">{item.desc}</p>
                     </div>
                   </Link>
                 ))}

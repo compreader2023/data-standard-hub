@@ -100,7 +100,7 @@
     transform: translateY(-2px);
   }
   .nav-link {
-    @apply px-4 py-2 text-sm font-medium transition-colors duration-200;
+    @apply px-4 py-2 text-base font-medium transition-colors duration-200;
   }
   .nav-link:hover {
     color: hsl(var(--secondary));
@@ -110,7 +110,7 @@
     border-bottom: 2px solid hsl(var(--secondary));
   }
   .tree-item {
-    @apply cursor-pointer px-3 py-2 rounded-md text-sm transition-colors duration-150;
+    @apply cursor-pointer px-3 py-2 rounded-md text-base transition-colors duration-150;
   }
   .tree-item:hover {
     @apply bg-accent;

@@ -146,7 +146,7 @@ function ModelPanel() {
         >
           <div className="text-center text-muted-foreground">
             <Box className="h-10 w-10 mx-auto mb-2 opacity-30" />
-            <p className="text-xs">{modelItems[currentIndex].label} - 加载区域</p>
+            <p className="text-sm">{modelItems[currentIndex].label} - 加载区域</p>
           </div>
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 rounded-lg">
             <ZoomIn className="h-6 w-6 text-foreground/70" />
@@ -185,7 +185,7 @@ function ModelPanel() {
           <div className="relative aspect-[16/9] flex items-center justify-center bg-muted/20 rounded-lg">
             <div className="text-center text-muted-foreground">
               <Box className="h-16 w-16 mx-auto mb-3 opacity-30" />
-              <p className="text-sm">{modelItems[currentIndex].label} - 全屏预览区域</p>
+              <p className="text-base">{modelItems[currentIndex].label} - 全屏预览区域</p>
             </div>
             {modelItems.length > 1 && (
               <>
@@ -230,7 +230,7 @@ function BasicInfoPanel({ node }: { node: CategoryNode }) {
           <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
         </Button>
       </div>
-      <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+      <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-base">
         <div className="md:col-span-2">
           <dt className="text-muted-foreground mb-0.5">描述</dt>
           <dd className="text-foreground">{node.description || "暂无描述"}</dd>
@@ -268,7 +268,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
   return (
     <div className="space-y-4">
       {/* Breadcrumb */}
-      <nav className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground mb-2">
+      <nav className="flex flex-wrap items-center gap-1 text-base text-muted-foreground mb-2">
         {path.map((p, i) => (
           <span key={p.code} className="flex items-center gap-1">
             {i > 0 && <span className="mx-1">/</span>}
@@ -285,7 +285,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
       {/* Prominent name & code */}
       <div className="detail-section">
         <h3 className="text-xl md:text-2xl font-bold text-primary">{node.name}</h3>
-        <p className="text-sm font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
+        <p className="text-base font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
       </div>
 
       {/* Level 6: Product detail */}
@@ -328,7 +328,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
               </Button>
             </div>
           </div>
-          <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-sm">
+          <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-base">
             <div className="md:col-span-2">
               <dt className="text-muted-foreground mb-0.5">描述</dt>
               <dd className="text-foreground">{node.description || "暂无描述"}</dd>
@@ -348,12 +348,12 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
                 className="text-left p-3 rounded-md border border-border hover:border-primary hover:bg-accent transition-colors group"
                 onClick={() => onNavigate(child)}
               >
-                <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-1">
+                <div className="text-base font-medium text-foreground group-hover:text-primary transition-colors mb-1">
                   {child.name}
                 </div>
-                <div className="text-xs font-mono text-muted-foreground">{getFullCode(child.code)}</div>
+                <div className="text-sm font-mono text-muted-foreground">{getFullCode(child.code)}</div>
                 {child.children && child.children.length > 0 && (
-                  <div className="text-xs text-muted-foreground mt-1">
+                  <div className="text-sm text-muted-foreground mt-1">
                     {child.children.length} 个子项
                   </div>
                 )}
@@ -385,7 +385,7 @@ function AttributeTable({ node }: { node: CategoryNode }) {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full text-base">
           <thead>
             <tr className="bg-primary text-primary-foreground">
               <th className="px-3 py-2.5 text-left font-medium whitespace-nowrap rounded-tl-md">序号</th>
@@ -400,11 +400,11 @@ function AttributeTable({ node }: { node: CategoryNode }) {
             {node.attributes!.map((attr, i) => (
               <tr key={attr.code} className={i % 2 === 0 ? "bg-card" : "bg-muted/30"}>
                 <td className="px-3 py-2.5 border-b border-border">{attr.seq}</td>
-                <td className="px-3 py-2.5 border-b border-border font-mono text-xs">{attr.code}</td>
+                <td className="px-3 py-2.5 border-b border-border font-mono text-sm">{attr.code}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.name}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.type}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.unitCodeName}</td>
-                <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-xs leading-relaxed">{attr.values}</td>
+                <td className="px-3 py-2.5 border-b border-border whitespace-pre-line text-sm leading-relaxed">{attr.values}</td>
               </tr>
             ))}
           </tbody>
