@@ -403,7 +403,7 @@ export default function Index() {
               ))}
             </div>
           </div>
-          <Link to="/news" className="text-xs text-secondary hover:underline shrink-0">更多</Link>
+          <Link to="/news" className="text-sm text-secondary hover:underline shrink-0">更多</Link>
         </div>
       </section>
 
