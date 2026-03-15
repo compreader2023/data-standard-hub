@@ -100,7 +100,7 @@ const experts = [
   { name: "杨静", org: "中国电力建设集团有限公司" },
 ];
 
-const partners = ["中国石油", "中国石化", "中国海油", "国家管网", "中国化学", "中国中冶", "华能集团"];
+
 
 const partnerCategories = [
   {
