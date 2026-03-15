@@ -285,7 +285,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
       {/* Prominent name & code */}
       <div className="detail-section">
         <h3 className="text-xl md:text-2xl font-bold text-primary">{node.name}</h3>
-        <p className="text-sm font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
+        <p className="text-base font-mono text-muted-foreground mt-1">{getFullCode(node.code)}</p>
       </div>
 
       {/* Level 6: Product detail */}
