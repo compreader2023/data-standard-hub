@@ -463,7 +463,7 @@ export default function Index() {
       <section className="py-16 md:py-20">
         <div className="container">
           <div className="text-center mb-12">
-            <span className="text-secondary font-semibold text-sm mb-2 block">生态共建</span>
+            <span className="text-secondary font-semibold text-base mb-2 block">生态共建</span>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground">CPMS 生态合作伙伴体系</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
