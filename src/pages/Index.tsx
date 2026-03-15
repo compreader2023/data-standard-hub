@@ -525,9 +525,9 @@ export default function Index() {
                   <Link key={i} to="/news" className="flex gap-4 card-elevated bg-card rounded-lg border border-border overflow-hidden">
                     <img src={item.image} alt={item.title} className="w-28 h-24 object-cover shrink-0" />
                     <div className="py-3 pr-4">
-                      <span className="text-xs text-muted-foreground">{item.date}</span>
-                      <h3 className="font-semibold text-foreground mt-1 mb-1 text-sm line-clamp-1">{item.title}</h3>
-                      <p className="text-xs text-muted-foreground line-clamp-2">{item.desc}</p>
+                       <span className="text-sm text-muted-foreground">{item.date}</span>
+                       <h3 className="font-semibold text-foreground mt-1 mb-1 text-base line-clamp-1">{item.title}</h3>
+                       <p className="text-sm text-muted-foreground line-clamp-2">{item.desc}</p>
                     </div>
                   </Link>
                 ))}
