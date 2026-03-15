@@ -400,7 +400,7 @@ function AttributeTable({ node }: { node: CategoryNode }) {
             {node.attributes!.map((attr, i) => (
               <tr key={attr.code} className={i % 2 === 0 ? "bg-card" : "bg-muted/30"}>
                 <td className="px-3 py-2.5 border-b border-border">{attr.seq}</td>
-                <td className="px-3 py-2.5 border-b border-border font-mono text-xs">{attr.code}</td>
+                <td className="px-3 py-2.5 border-b border-border font-mono text-sm">{attr.code}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.name}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.type}</td>
                 <td className="px-3 py-2.5 border-b border-border">{attr.unitCodeName}</td>
