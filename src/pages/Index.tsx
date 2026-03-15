@@ -394,7 +394,7 @@ export default function Index() {
             <span className="text-base font-semibold text-foreground">公告</span>
           </div>
           <div className="flex-1 overflow-hidden">
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-6 text-base">
               {announcements.slice(0, 3).map((item, i) => (
                 <Link key={i} to="/news" className="whitespace-nowrap text-muted-foreground hover:text-primary transition-colors truncate">
                   <span className="text-xs text-muted-foreground/60 mr-2">[{item.date}]</span>
