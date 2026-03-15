@@ -293,7 +293,7 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
                 {expert.name.charAt(0)}
               </div>
               <h3 className="font-semibold text-foreground">{expert.name}</h3>
-              <p className="text-xs text-muted-foreground mt-1">{expert.org}</p>
+              <p className="text-sm text-muted-foreground mt-1">{expert.org}</p>
             </div>
           ))}
         </div>
