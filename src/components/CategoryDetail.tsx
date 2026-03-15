@@ -31,7 +31,7 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
           <h2 className="text-lg font-semibold text-foreground">产品图片</h2>
         </div>
         <Button variant="outline" size="sm">
-          <Edit className="h-3.5 w-3.5 mr-1" /> 申请修改
+          <Edit className="h-3.5 w-3.5 mr-1" /> 申请添加/修改
         </Button>
       </div>
       <div className="relative group max-w-md">
@@ -52,12 +52,23 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
             <button onClick={(e) => { e.stopPropagation(); nextImage(); }} className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background/70 hover:bg-background flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
               <ChevronRight className="h-4 w-4" />
             </button>
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-muted-foreground bg-background/70 px-2 py-0.5 rounded">
-              {currentIndex + 1} / {productImages.length}
-            </div>
           </>
         )}
       </div>
+      {/* Thumbnails */}
+      {productImages.length > 1 && (
+        <div className="flex gap-2 mt-3 max-w-md">
+          {productImages.map((img, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`w-16 h-12 rounded overflow-hidden border-2 transition-colors ${i === currentIndex ? "border-primary" : "border-border hover:border-muted-foreground"}`}
+            >
+              <img src={img} alt={`缩略图 ${i + 1}`} className="w-full h-full object-cover bg-white" />
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Lightbox */}
       <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
@@ -76,8 +87,16 @@ function ProductImagesPanel({ node }: { node: CategoryNode }) {
               </>
             )}
           </div>
-          <div className="text-center text-xs text-muted-foreground mt-1">
-            {currentIndex + 1} / {productImages.length}
+          <div className="flex gap-2 justify-center mt-2">
+            {productImages.map((img, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`w-14 h-10 rounded overflow-hidden border-2 transition-colors ${i === currentIndex ? "border-primary" : "border-border hover:border-muted-foreground"}`}
+              >
+                <img src={img} alt={`缩略图 ${i + 1}`} className="w-full h-full object-cover bg-white" />
+              </button>
+            ))}
           </div>
         </DialogContent>
       </Dialog>
