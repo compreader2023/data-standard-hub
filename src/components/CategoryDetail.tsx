@@ -348,7 +348,7 @@ export default function CategoryDetail({ node, onNavigate }: Props) {
                 className="text-left p-3 rounded-md border border-border hover:border-primary hover:bg-accent transition-colors group"
                 onClick={() => onNavigate(child)}
               >
-                <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-1">
+                <div className="text-base font-medium text-foreground group-hover:text-primary transition-colors mb-1">
                   {child.name}
                 </div>
                 <div className="text-xs font-mono text-muted-foreground">{getFullCode(child.code)}</div>
