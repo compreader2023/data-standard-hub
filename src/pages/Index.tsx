@@ -391,7 +391,7 @@ export default function Index() {
         <div className="container flex items-center gap-4">
           <div className="flex items-center gap-2 shrink-0">
             <Volume2 className="h-4 w-4 text-secondary" />
-            <span className="text-sm font-semibold text-foreground">公告</span>
+            <span className="text-base font-semibold text-foreground">公告</span>
           </div>
           <div className="flex-1 overflow-hidden">
             <div className="flex items-center gap-6 text-sm">
