@@ -66,7 +66,7 @@ export default function DataStandards() {
               </SheetContent>
             </Sheet>
             {selectedNode && (
-              <span className="text-sm text-muted-foreground truncate">
+              <span className="text-base text-muted-foreground truncate">
                 当前: {selectedNode.name}
               </span>
             )}
