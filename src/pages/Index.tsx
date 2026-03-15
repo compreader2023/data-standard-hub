@@ -276,7 +276,7 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
   }, [visibleCount, pickRandom]);
 
   return (
-    <section className="py-16 md:py-20 section-alt">
+    <section className="py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
@@ -511,7 +511,7 @@ export default function Index() {
       <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
 
       {/* News Section - Policy + Industry side by side */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 section-alt">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Policy News */}
