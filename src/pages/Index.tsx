@@ -276,7 +276,7 @@ function ExpertsCarousel({ experts }: { experts: { name: string; org: string }[]
   }, [visibleCount, pickRandom]);
 
   return (
-    <section className="py-16 md:py-20 section-alt">
+    <section className="py-16 md:py-20">
       <div className="container">
         <div className="text-center mb-12">
           <span className="text-secondary font-semibold text-sm mb-2 block">CPMS专家库</span>
