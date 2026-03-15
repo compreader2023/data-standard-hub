@@ -452,7 +452,7 @@ export default function Index() {
                   <svc.icon className="h-6 w-6 text-accent-foreground group-hover:text-primary-foreground transition-colors" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2 text-lg">{svc.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{svc.desc}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{svc.desc}</p>
               </Link>
             ))}
           </div>
