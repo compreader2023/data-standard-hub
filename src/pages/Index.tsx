@@ -412,7 +412,7 @@ export default function Index() {
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="text-secondary font-semibold text-sm mb-2 block">关于CPMS</span>
+              <span className="text-secondary font-semibold text-base mb-2 block">关于CPMS</span>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">构建工业产品数据标准生态</h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 CPMS（China Product Master Standard）致力于建立统一的工业产品数据管理标准体系，覆盖工程建设全生命周期的产品数据需求。通过标准化的产品分类、属性定义和数据格式，实现产业链上下游的高效数据交换与共享。
