@@ -522,26 +522,6 @@ export default function Index() {
       {/* Join Partner Dialog */}
       <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
 
-      {/* Video Dialog */}
-      <Dialog open={videoOpen} onOpenChange={(open) => { setVideoOpen(open); }}>
-        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none">
-          <DialogHeader className="sr-only">
-            <DialogTitle>CPMS宣传视频</DialogTitle>
-            <DialogDescription>CPMS平台宣传视频播放</DialogDescription>
-          </DialogHeader>
-          <div className="aspect-video w-full">
-            {videoOpen && (
-              <video
-                src="https://lite-cdn.yangbentong.com/739c2fed-11b8-4adc-9ed7-4741bf7810e9/d515ee1b-6666-4180-8dbf-3ff9399fdb6c.mp4"
-                className="w-full h-full"
-                controls
-                autoPlay
-              />
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-
       {/* News Section - Policy + Industry side by side */}
       <section className="py-16 md:py-20 section-alt">
         <div className="container">
