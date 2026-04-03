@@ -306,6 +306,7 @@ export default function Index() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [joinDialogOpen, setJoinDialogOpen] = useState(false);
   const [joinDefaultType, setJoinDefaultType] = useState("");
+  const [videoOpen, setVideoOpen] = useState(false);
   const nextBanner = useCallback(() => {
     setCurrentBanner((prev) => (prev + 1) % banners.length);
   }, []);
@@ -424,7 +425,7 @@ export default function Index() {
                 <Link to="/about">了解更多</Link>
               </Button>
             </div>
-            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video">
+            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video" onClick={() => setVideoOpen(true)}>
               <img src={videoCover} alt="CPMS宣传视频" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
                 <PlayCircle className="h-16 w-16 text-primary-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
@@ -509,6 +510,26 @@ export default function Index() {
 
       {/* Join Partner Dialog */}
       <JoinPartnerDialog open={joinDialogOpen} onOpenChange={setJoinDialogOpen} defaultType={joinDefaultType} />
+
+      {/* Video Dialog */}
+      <Dialog open={videoOpen} onOpenChange={(open) => { setVideoOpen(open); }}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-none">
+          <DialogHeader className="sr-only">
+            <DialogTitle>CPMS宣传视频</DialogTitle>
+            <DialogDescription>CPMS平台宣传视频播放</DialogDescription>
+          </DialogHeader>
+          <div className="aspect-video w-full">
+            {videoOpen && (
+              <video
+                src="https://lite-cdn.yangbentong.com/739c2fed-11b8-4adc-9ed7-4741bf7810e9/d515ee1b-6666-4180-8dbf-3ff9399fdb6c.mp4"
+                className="w-full h-full"
+                controls
+                autoPlay
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
 
       {/* News Section - Policy + Industry side by side */}
       <section className="py-16 md:py-20 section-alt">
