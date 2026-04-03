@@ -425,7 +425,7 @@ export default function Index() {
                 <Link to="/about">了解更多</Link>
               </Button>
             </div>
-            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video">
+            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video" onClick={() => setVideoOpen(true)}>
               <img src={videoCover} alt="CPMS宣传视频" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
                 <PlayCircle className="h-16 w-16 text-primary-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
