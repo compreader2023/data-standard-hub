@@ -425,11 +425,22 @@ export default function Index() {
                 <Link to="/about">了解更多</Link>
               </Button>
             </div>
-            <div className="relative rounded-xl overflow-hidden cursor-pointer group aspect-video" onClick={() => setVideoOpen(true)}>
-              <img src={videoCover} alt="CPMS宣传视频" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
-                <PlayCircle className="h-16 w-16 text-primary-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
-              </div>
+            <div className="relative rounded-xl overflow-hidden aspect-video">
+              {videoOpen ? (
+                <video
+                  src="https://lite-cdn.yangbentong.com/739c2fed-11b8-4adc-9ed7-4741bf7810e9/d515ee1b-6666-4180-8dbf-3ff9399fdb6c.mp4"
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                />
+              ) : (
+                <div className="w-full h-full cursor-pointer group" onClick={() => setVideoOpen(true)}>
+                  <img src={videoCover} alt="CPMS宣传视频" className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-foreground/20 group-hover:bg-foreground/30 transition-colors flex items-center justify-center">
+                    <PlayCircle className="h-16 w-16 text-primary-foreground drop-shadow-lg group-hover:scale-110 transition-transform" />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
