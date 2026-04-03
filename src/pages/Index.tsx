@@ -306,6 +306,7 @@ export default function Index() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [joinDialogOpen, setJoinDialogOpen] = useState(false);
   const [joinDefaultType, setJoinDefaultType] = useState("");
+  const [videoOpen, setVideoOpen] = useState(false);
   const nextBanner = useCallback(() => {
     setCurrentBanner((prev) => (prev + 1) % banners.length);
   }, []);
